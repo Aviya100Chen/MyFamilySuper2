@@ -1,0 +1,49 @@
+package com.example.myfamilyssuper;
+
+import android.os.Bundle;
+import android.widget.TextView;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class MyCart extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private CartAdapter cartAdapter;
+    private TextView totalPriceTextView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_my_cart);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        recyclerView = findViewById(R.id.recyclerView_cart);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ArrayList<Product> cartItems = CartManager.getInstance().getCartItems();
+        cartAdapter = new CartAdapter(cartItems);
+        recyclerView.setAdapter(cartAdapter);
+
+        // הצגת הסכום הכולל
+        totalPriceTextView = findViewById(R.id.textView_total_2);
+        if (totalPriceTextView != null) {
+            double totalPrice = CartManager.getInstance().getTotalPrice();
+            totalPriceTextView.setText("₪" + String.format("%.2f", totalPrice));
+        }
+    }
+}
+
+

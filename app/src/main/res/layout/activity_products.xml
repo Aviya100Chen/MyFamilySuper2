@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    >
+
+    <!-- שורה 1: כפתור + תמונה -->
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="match_parent"
+        android:layout_height="142dp"
+        android:background="#5DE1E6"
+        app:srcCompat="@drawable/main_icon" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/fruit_vegetables" />
+
+            <Button
+                android:id="@+id/fruit_vege"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ירקות ופירות"
+                android:textColorLink="#9C27B0"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <!-- שורה 2: כפתור + תמונה -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/milk_eggs_pic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/milk_eggs" />
+
+            <Button
+                android:id="@+id/milk_eggs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="מוצרי חלב וביצים"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <!-- שורה 3: כפתור + תמונה -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/meat_fish_pic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/meat_fish" />
+
+            <Button
+                android:id="@+id/meat_fish"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="בשר ודגים"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <!-- שורה 4: כפתור + תמונה -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/breads_legumes_pic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/bread_legums" />
+
+            <Button
+                android:id="@+id/breads_legumes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="לחם וקטניות"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <!-- שורה 5: כפתור + תמונה -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/drinks_pic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/drinks" />
+
+            <Button
+                android:id="@+id/drinks"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="משקאות"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <!-- שורה 6: כפתור + תמונה -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/candy_snacks_pic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/candy_snacks" />
+
+            <Button
+                android:id="@+id/candy_snacks"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="חטיפים וממתקים"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
