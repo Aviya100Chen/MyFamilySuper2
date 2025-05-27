@@ -48,6 +48,10 @@ public class LogInScreen extends AppCompatActivity {
 
         // לחצן התחברות עם אימות
         buttonSignIn.setOnClickListener(view -> {
+            //TODO : REMOVE TWO NEXT LINES
+            Intent i = new Intent(this, Start_Screen.class);
+            startActivity(i);
+
             String username = usernameEditText.getText().toString().trim();
             String password = passwordEditText.getText().toString().trim();
 
@@ -60,8 +64,8 @@ public class LogInScreen extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(this, Start_Screen.class);
-                            startActivity(i);
+                            //Intent i = new Intent(this, Start_Screen.class);
+                            //startActivity(i);
                             finish();
                         } else {
                             Toast.makeText(LogInScreen.this, "שם המשתמש והסיסמא שגויים. נסה שנית", Toast.LENGTH_SHORT).show();

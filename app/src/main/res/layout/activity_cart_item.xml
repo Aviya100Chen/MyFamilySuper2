@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageView_cart"
@@ -103,12 +103,11 @@
         android:id="@+id/textView_totalprice1_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="סכום כולל:"
         app:layout_constraintEnd_toStartOf="@+id/imageView_cart"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="21dp"
-        tools:text="סה&quot;כ פריט:" />
+        tools:layout_editor_absoluteY="21dp" />
 
     <TextView
         android:id="@+id/textView_totalprice2_cart"
