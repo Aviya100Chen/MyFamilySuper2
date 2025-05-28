@@ -109,7 +109,7 @@ public class sign_up_screen extends AppCompatActivity {
                                 userMap.put("email", email);
                                 userMap.put("birthdate", birthdate); // שמירת תאריך הלידה
 
-                                db.collection("users")
+                                db.collection("Users")
                                         .document(firebaseUser.getUid())
                                         .set(userMap)
                                         .addOnSuccessListener(aVoid -> {

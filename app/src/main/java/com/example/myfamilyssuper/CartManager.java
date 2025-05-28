@@ -7,6 +7,7 @@ public class CartManager {
     private ArrayList<Product> cartItems;
 
     private CartManager() {
+
         cartItems = new ArrayList<>();
     }
 
@@ -18,7 +19,11 @@ public class CartManager {
     }
 
     public void addToCart(Product product) {
+
         cartItems.add(product);
+
+
+
     }
 
     public ArrayList<Product> getCartItems() {
@@ -26,10 +31,12 @@ public class CartManager {
     }
 
     public void clearCart() {
+
         cartItems.clear();
     }
 
     public void removeFromCart(Product product) {
+
         cartItems.remove(product);
     }
 
