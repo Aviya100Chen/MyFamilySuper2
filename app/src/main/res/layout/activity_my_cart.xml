@@ -20,7 +20,7 @@
 
     <!-- כותרת -->
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/cart_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -43,7 +43,7 @@
         app:layout_constraintBottom_toTopOf="@id/cart_summary_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2" />
+        app:layout_constraintTop_toBottomOf="@id/cart_name" />
 
     <!-- סיכום מחיר וכפתור -->
     <LinearLayout

@@ -10,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class MyCart extends AppCompatActivity {
@@ -30,19 +33,44 @@ public class MyCart extends AppCompatActivity {
             return insets;
         });
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String cartId = getIntent().getExtras().getString("cartId"); // Replace with the actual ID you're looking for
+
+        DocumentReference cartRef = db.collection("carts").document(cartId);
+
+        cartRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                Cart cart = documentSnapshot.toObject(Cart.class);
+                if (cart != null) {
+                    setUI(cart);
+                }
+            } else {
+
+            }
+        });
+
+
+    }
+
+    private void setUI(Cart cart) {
         recyclerView = findViewById(R.id.recyclerView_cart);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        ArrayList<Product> cartItems = CartManager.getInstance().getCartItems();
+        if(cart.getProducts()==null){
+            cart.setProducts(new ArrayList<>());
+        }
+        ArrayList<Product> cartItems = cart.getProducts();
         cartAdapter = new CartAdapter(cartItems);
         recyclerView.setAdapter(cartAdapter);
 
         // הצגת הסכום הכולל
         totalPriceTextView = findViewById(R.id.textView_total_2);
-        if (totalPriceTextView != null) {
-            double totalPrice = CartManager.getInstance().getTotalPrice();
-            totalPriceTextView.setText("₪" + String.format("%.2f", totalPrice));
+        double totalPrice = 0;
+        for (int i = 0; i < cart.getProducts().size(); i++) {
+            totalPrice += cart.getProducts().get(i).getPrice();
         }
+        totalPriceTextView.setText("₪" + String.format("%.2f", totalPrice));
+        TextView nameT = findViewById(R.id.cart_name);
+        nameT.setText(cart.getCartName());
     }
 }
 

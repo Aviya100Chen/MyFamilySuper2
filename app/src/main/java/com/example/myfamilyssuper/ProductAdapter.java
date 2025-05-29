@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.graphics.Color;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -75,6 +75,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             CartManager.getInstance().addToCart(productToAdd);
 
             Toast.makeText(context, "המוצר נוסף לעגלה", Toast.LENGTH_SHORT).show();
+            holder.addToCartButton.setBackgroundColor(Color.parseColor("#2196F3"));
+
+
+
         });
     }
 

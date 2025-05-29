@@ -45,8 +45,25 @@ public class ProductsActivity extends AppCompatActivity {
             startActivity(i);
         });
 
+        Button breads_legumes = (Button)findViewById(R.id.breads_legumes);
+        breads_legumes.setOnClickListener(view -> {
+            Intent i = new Intent(this, ListProducts.class);
+            i.putExtra("category","לחם וקטניות");
+            startActivity(i);
+        });
 
+        Button drinks = (Button)findViewById(R.id.drinks);
+        drinks.setOnClickListener(view -> {
+            Intent i = new Intent(this, ListProducts.class);
+            i.putExtra("category","משקאות");
+            startActivity(i);
+        });
 
-
+        Button candy_snacks = (Button)findViewById(R.id.candy_snacks);
+        candy_snacks.setOnClickListener(view -> {
+            Intent i = new Intent(this, ListProducts.class);
+            i.putExtra("category","חטיפים וממתקים");
+            startActivity(i);
+        });
     }
 }
