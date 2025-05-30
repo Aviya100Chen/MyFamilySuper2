@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -24,6 +25,8 @@ import com.google.firebase.firestore.QuerySnapshot;
  * שונה שם המחלקה מ-list_products ל-ListProducts בהתאם לקונבנציה בג'אווה.
  * אין שינוי בלוגיקה – רק קריאה לשם Activity מסודרת.
  */
+
+
 public class ListProducts extends AppCompatActivity {
     private static final String TAG = "GetProductData";
     private static final String COLLECTION_NAME = "Products";
@@ -31,7 +34,7 @@ public class ListProducts extends AppCompatActivity {
 
     private ArrayList<Product> products = new ArrayList<>();
     private ProductAdapter productAdapter;
-
+    Cart cart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +46,7 @@ public class ListProducts extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        String cartId = getIntent().getExtras().getString("cartId");
         // קבלת קטגוריה מה־Intent
         String category = getIntent().getStringExtra("category");
 
@@ -69,6 +72,19 @@ public class ListProducts extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Error getting products", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        DocumentReference cartRef = db.collection("carts").document(cartId);
+
+        cartRef.get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                cart = documentSnapshot.toObject(Cart.class);
+                productAdapter.setCart(cart);
+            } else {
+
+            }
+        });
+
     }
 
     // ממשק להחזרת מוצרים באופן אסינכרוני
@@ -104,4 +120,6 @@ public class ListProducts extends AppCompatActivity {
                     }
                 });
     }
+
+
 }

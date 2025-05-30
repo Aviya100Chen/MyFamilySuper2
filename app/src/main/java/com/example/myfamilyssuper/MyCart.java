@@ -33,8 +33,8 @@ public class MyCart extends AppCompatActivity {
             return insets;
         });
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         String cartId = getIntent().getExtras().getString("cartId"); // Replace with the actual ID you're looking for
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         DocumentReference cartRef = db.collection("carts").document(cartId);
 

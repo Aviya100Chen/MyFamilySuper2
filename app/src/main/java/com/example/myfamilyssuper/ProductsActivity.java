@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ProductsActivity extends AppCompatActivity {
 
+    String cartId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,11 +23,12 @@ public class ProductsActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        cartId = getIntent().getExtras().getString("cartId");
         Button fruit_vege = (Button)findViewById(R.id.fruit_vege);
         fruit_vege.setOnClickListener(view -> {
             Intent i = new Intent(this, ListProducts.class);
             i.putExtra("category","ירקות ופירות");
+            i.putExtra("cartId",cartId);
             startActivity(i);
         });
 
@@ -35,6 +37,7 @@ public class ProductsActivity extends AppCompatActivity {
         milk_eggs.setOnClickListener(view -> {
             Intent i = new Intent(this, ListProducts.class);
             i.putExtra("category","מוצרי חלב וביצים");
+            i.putExtra("cartId",cartId);
             startActivity(i);
         });
 
@@ -42,6 +45,7 @@ public class ProductsActivity extends AppCompatActivity {
         meat_fish.setOnClickListener(view -> {
             Intent i = new Intent(this, ListProducts.class);
             i.putExtra("category","בשר ודגים");
+            i.putExtra("cartId",cartId);
             startActivity(i);
         });
 
@@ -49,6 +53,7 @@ public class ProductsActivity extends AppCompatActivity {
         breads_legumes.setOnClickListener(view -> {
             Intent i = new Intent(this, ListProducts.class);
             i.putExtra("category","לחם וקטניות");
+            i.putExtra("cartId",cartId);
             startActivity(i);
         });
 
@@ -56,6 +61,7 @@ public class ProductsActivity extends AppCompatActivity {
         drinks.setOnClickListener(view -> {
             Intent i = new Intent(this, ListProducts.class);
             i.putExtra("category","משקאות");
+            i.putExtra("cartId",cartId);
             startActivity(i);
         });
 

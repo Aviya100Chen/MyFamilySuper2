@@ -13,11 +13,15 @@ import android.graphics.Color;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private ArrayList<Product> products;
+    private Cart cart;
 
     public ProductAdapter(ArrayList<Product> products) {
         this.products = products;
@@ -72,10 +76,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             );
             productToAdd.setQuantity(holder.quantity);
 
-            CartManager.getInstance().addToCart(productToAdd);
 
-            Toast.makeText(context, "המוצר נוסף לעגלה", Toast.LENGTH_SHORT).show();
-            holder.addToCartButton.setBackgroundColor(Color.parseColor("#2196F3"));
+            if(cart == null){
+                Toast.makeText(context, "נסה שנית", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                if(cart.getProducts() == null){
+                    cart.setProducts(new ArrayList<>());
+                }
+                cart.getProducts().add(productToAdd);
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference cartRef = db.collection("carts").document(cart.getId());
+                cartRef.set(cart);
+                Toast.makeText(context, "המוצר נוסף לעגלה", Toast.LENGTH_SHORT).show();
+                holder.addToCartButton.setBackgroundColor(Color.parseColor("#2196F3"));
+            }
+
 
 
 
@@ -118,6 +134,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 .show();
     }
 
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         public TextView categoryTextView;
         public TextView nameTextView;
@@ -145,6 +165,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 quantityTextView.setText(String.format("%.1f ק\"ג", quantity));
             } else {
                 quantityTextView.setText(String.format("%.0f יח'", quantity));
+                quantity = Math.floor(quantity);
             }
         }
 
