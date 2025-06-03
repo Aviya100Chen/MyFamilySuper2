@@ -18,7 +18,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,6 +44,16 @@ public class Start_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_start_screen);
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView).setOnItemSelectedListener {item ->
+
+
+
+
+            return@setOnItemSelectedListener true
+
+
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -82,6 +95,12 @@ public class Start_Screen extends AppCompatActivity {
         readCart();
 
     }
+
+    private void replaceFragment(fragment:Fragment) {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+
+        }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -102,14 +121,7 @@ public class Start_Screen extends AppCompatActivity {
             startActivity(new Intent(this, LogInScreen.class));
             finishAffinity();
             return true;
-
-        } else if (id == R.id.menu_home) {
-            // Go back to Start_Screen
-            Intent intent = new Intent(this, Start_Screen.class);
-            startActivity(intent);
-            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     private void readCart () {
@@ -220,5 +232,9 @@ public class Start_Screen extends AppCompatActivity {
 
         dialog.show();
     }
+
+
+
 }
+
 
