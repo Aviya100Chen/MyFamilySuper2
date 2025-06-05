@@ -18,7 +18,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -28,12 +27,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-public class Start_Screen extends AppCompatActivity {
+public class Start_ScreenActivity extends AppCompatActivity {
 
     ArrayList<Cart> myCarts = new ArrayList<>();
     ArrayList<Cart> cartList = new ArrayList<>();
@@ -44,62 +42,51 @@ public class Start_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_start_screen);
-        findViewById<BottomNavigationView>(R.id.bottomNavigationView).setOnItemSelectedListener {item ->
-
-
-
-
-            return@setOnItemSelectedListener true
-
-
-
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Intent intent = new Intent(this, MusicService.class);
+        startService(intent);
+
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mySpinner = findViewById(R.id.spinner);
-        Button productsButton = findViewById(R.id.product_button);
-
-        productsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // מעבר למסך בשם products
-                if(myCarts.size() == 0){
-                    Toast.makeText(Start_Screen.this,"יש ליצור עגלה", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Intent intent = new Intent(Start_Screen.this, ProductsActivity.class);
-                intent.putExtra("cartId",myCarts.get(mySpinner.getSelectedItemPosition()).getId());
-                startActivity(intent);
-            }
-        });
-        Button myCart_buttonButton = findViewById(R.id.myCart_button);
-
-        myCart_buttonButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // מעבר למסך בשם myCart
-                if(myCarts.size() == 0){
-                    Toast.makeText(Start_Screen.this,"יש ליצור עגלה", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Intent intent = new Intent(Start_Screen.this, MyCart.class);
-                intent.putExtra("cartId",myCarts.get(mySpinner.getSelectedItemPosition()).getId());
-                startActivity(intent);
-            }
-        });
         readCart();
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.menu_home);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.menu_products) {
+                    if(myCarts.size() == 0){
+                        Toast.makeText(Start_ScreenActivity.this,"יש ליצור עגלה", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                    Intent intent = new Intent(Start_ScreenActivity.this, ProductsActivity.class);
+                    intent.putExtra("cartId",myCarts.get(mySpinner.getSelectedItemPosition()).getId());
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.menu_cart) {
+                    if(myCarts.size() == 0){
+                        Toast.makeText(Start_ScreenActivity.this,"יש ליצור עגלה", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                    Intent intent = new Intent(Start_ScreenActivity.this, MyCart.class);
+                    intent.putExtra("cartId",myCarts.get(mySpinner.getSelectedItemPosition()).getId());
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
 
     }
 
-    private void replaceFragment(fragment:Fragment) {
-            val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,7 +99,9 @@ public class Start_Screen extends AppCompatActivity {
 
         if (id == R.id.menu_about) {
             // Show "About" dialog
-            Toast.makeText(this, "אודות", Toast.LENGTH_SHORT).show();
+            Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.dialog_about);
+            dialog.show();
             return true;
 
         } else if (id == R.id.menu_log_out) {
@@ -175,7 +164,7 @@ public class Start_Screen extends AppCompatActivity {
 
         Cart cart = new Cart(null, name.getText().toString(), generatedId, users);
         cartRef.set(cart);
-        Intent intent = new Intent(Start_Screen.this, Start_Screen.class);
+        Intent intent = new Intent(Start_ScreenActivity.this, Start_ScreenActivity.class);
         startActivity(intent);
         finish();
 
@@ -183,7 +172,7 @@ public class Start_Screen extends AppCompatActivity {
 
     public void shareClick(View view) {
         if(myCarts.size() == 0){
-            Toast.makeText(Start_Screen.this,"יש ליצור עגלה", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Start_ScreenActivity.this,"יש ליצור עגלה", Toast.LENGTH_SHORT).show();
             return;
         }
         Dialog dialog = new Dialog(this);
@@ -207,11 +196,11 @@ public class Start_Screen extends AppCompatActivity {
                                         if(!myCarts.get(mySpinner.getSelectedItemPosition()).getUsersID().contains(email)){
                                             happend = true;
                                             myCarts.get(mySpinner.getSelectedItemPosition()).getUsersID().add(document.getId());
-                                            Toast.makeText(Start_Screen.this,"העגלה שותפה בהצלחה", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Start_ScreenActivity.this,"העגלה שותפה בהצלחה", Toast.LENGTH_SHORT).show();
                                         }
                                         else{
                                             happend = true;
-                                            Toast.makeText(Start_Screen.this,"המשתמש הזה כבר משותף עם העגלה הזו", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(Start_ScreenActivity.this,"המשתמש הזה כבר משותף עם העגלה הזו", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -222,7 +211,7 @@ public class Start_Screen extends AppCompatActivity {
                                 cartRef.set(myCarts.get(mySpinner.getSelectedItemPosition()));
                             }
                             else{
-                                Toast.makeText(Start_Screen.this,"האימייל לא קיים", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Start_ScreenActivity.this,"האימייל לא קיים", Toast.LENGTH_SHORT).show();
                             }
 
                             // Do something with allUsers list (e.g., update UI)

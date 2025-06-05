@@ -2,13 +2,19 @@ package com.example.myfamilyssuper;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class ProductsActivity extends AppCompatActivity {
 
@@ -24,6 +30,29 @@ public class ProductsActivity extends AppCompatActivity {
             return insets;
         });
         cartId = getIntent().getExtras().getString("cartId");
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.menu_products);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.menu_home) {
+
+                    Intent intent = new Intent(ProductsActivity.this, Start_ScreenActivity.class);
+                    intent.putExtra("cartId",cartId);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.menu_cart) {
+
+                    Intent intent = new Intent(ProductsActivity.this, MyCart.class);
+                    intent.putExtra("cartId",cartId);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
+
         Button fruit_vege = (Button)findViewById(R.id.fruit_vege);
         fruit_vege.setOnClickListener(view -> {
             Intent i = new Intent(this, ListProducts.class);

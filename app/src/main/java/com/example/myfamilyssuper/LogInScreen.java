@@ -1,9 +1,8 @@
 package com.example.myfamilyssuper;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,7 +37,7 @@ public class LogInScreen extends AppCompatActivity {
         });
 
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            Intent i = new Intent(this, Start_Screen.class);
+            Intent i = new Intent(this, Start_ScreenActivity.class);
             startActivity(i);
         }
 
@@ -50,6 +49,9 @@ public class LogInScreen extends AppCompatActivity {
         buttonSignIn = findViewById(R.id.button_V);
         buttonSignUp = findViewById(R.id.button_signup);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        String savedEmail = sharedPreferences.getString("user_email", "");
+        usernameEditText.setText(savedEmail);
         // לחצן התחברות עם אימות
         buttonSignIn.setOnClickListener(view -> {
             //TODO : REMOVE TWO NEXT LINES
@@ -66,8 +68,12 @@ public class LogInScreen extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(username, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
+                            SharedPreferences sharedPreferences1 = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences1.edit();
+                            editor.putString("user_email", username);  // replace 'email' with your actual email string
+                            editor.apply();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(this, Start_Screen.class);
+                            Intent i = new Intent(this, Start_ScreenActivity.class);
                             startActivity(i);
                             finish();
                         } else {

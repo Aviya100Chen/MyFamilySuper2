@@ -2,14 +2,12 @@ package com.example.myfamilyssuper;
 
 public class Product {
     private String category;
-    private String image;
     private String name;
     private double price;
     private double quantity; // הכמות של המוצר (ביחידות או ק"ג בהתאם לקטגוריה)
 
-    public Product(String category, String image, String name, double price) {
+    public Product(String category, String image, double price) {
         this.category = category;
-        this.image = image;
         this.name = name;
         this.price = price;
         this.quantity = getDefaultQuantity(); // ברירת מחדל לפי הקטגוריה
@@ -21,10 +19,6 @@ public class Product {
 
     public String getCategory() {
         return category;
-    }
-
-    public String getImage() {
-        return image;
     }
 
     public String getName() {
@@ -41,10 +35,6 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public void setName(String name) {

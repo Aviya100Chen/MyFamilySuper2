@@ -1,8 +1,11 @@
 package com.example.myfamilyssuper;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -10,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -34,6 +39,29 @@ public class MyCart extends AppCompatActivity {
         });
 
         String cartId = getIntent().getExtras().getString("cartId"); // Replace with the actual ID you're looking for
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.menu_cart);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.menu_home) {
+
+                    Intent intent = new Intent(MyCart.this, Start_ScreenActivity.class);
+                    intent.putExtra("cartId",cartId);
+                    startActivity(intent);
+                    return true;
+                } else if (itemId == R.id.menu_products) {
+
+                    Intent intent = new Intent(MyCart.this, ProductsActivity.class);
+                    intent.putExtra("cartId",cartId);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         DocumentReference cartRef = db.collection("carts").document(cartId);

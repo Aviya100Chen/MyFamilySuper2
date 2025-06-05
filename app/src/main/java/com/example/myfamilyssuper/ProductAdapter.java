@@ -30,7 +30,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View productview = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_products_item, parent, false);
+        View productview = LayoutInflater.from(parent.getContext()).inflate(R.layout.products_item, parent, false);
         return new ProductViewHolder(productview);
     }
 
@@ -70,7 +70,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
             Product productToAdd = new Product(
                     currentProduct.getCategory(),
-                    currentProduct.getImage(),
                     currentProduct.getName(),
                     currentProduct.getPrice()
             );
@@ -91,9 +90,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 Toast.makeText(context, "המוצר נוסף לעגלה", Toast.LENGTH_SHORT).show();
                 holder.addToCartButton.setBackgroundColor(Color.parseColor("#2196F3"));
             }
-
-
-
 
         });
     }

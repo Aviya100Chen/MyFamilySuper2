@@ -18,9 +18,7 @@
         <activity
             android:name=".CartManager"
             android:exported="false" />
-        <activity
-            android:name=".ProductsItem"
-            android:exported="false" />
+
         <activity
             android:name=".ListProducts"
             android:exported="false" />
@@ -31,13 +29,10 @@
             android:name=".MyCart"
             android:exported="false" />
         <activity
-            android:name=".Start_Screen"
+            android:name=".Start_ScreenActivity"
             android:exported="false" />
         <activity
             android:name=".sign_up_screen"
-            android:exported="false" />
-        <activity
-            android:name=".SignInScreen"
             android:exported="false" />
         <activity
             android:name=".LogInScreen"
@@ -51,6 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".MusicService" />
     </application>
 
 </manifest>

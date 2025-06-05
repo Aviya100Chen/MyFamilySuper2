@@ -1,37 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:backgroundTint="#5DE1E6"
-    android:orientation="vertical"
-    android:padding="24dp">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="380dp"
+    android:layout_height="360dp">
 
     <TextView
-        android:id="@+id/textView_dialog_title"
-        android:layout_width="match_parent"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="אודות"
-        android:textColor="#673AB7"
-        android:textColorLink="#000000"
-        android:textSize="48sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="20dp"
+        android:text="קצת עליי"
+        android:textColor="#9C27B0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/about_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:lineSpacingExtra="4dp"
-        android:text="כאן תכתבי פרטים על עצמך 😊"
-        android:textColor="@android:color/black"
-        android:textSize="16sp" />
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="300dp"
+        android:layout_height="280dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/about" />
 
-    <Button
-        android:id="@+id/button_close_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="סגירה"
-        android:textSize="20sp" />
 
-</LinearLayout>
+
