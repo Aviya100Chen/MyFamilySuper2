@@ -24,23 +24,14 @@
         android:id="@+id/tv_quantity"
         android:layout_width="35dp"
         android:layout_height="46dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
         android:gravity="center"
         android:text="1"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/btn_increase"
+        app:layout_constraintStart_toEndOf="@+id/btn_decrease"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="75dp"
-        android:layout_height="95dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView_category_2"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textView_name_2"
@@ -83,7 +74,8 @@
         android:layout_width="40dp"
         android:layout_height="26dp"
         android:layout_marginTop="8dp"
-        android:text="מחיר"
+        android:layout_marginEnd="10dp"
+        android:text="מחיר:"
         android:textAlignment="viewStart"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +85,8 @@
         android:id="@+id/textView_name_1"
         android:layout_width="40dp"
         android:layout_height="26dp"
-        android:text="שם"
+        android:layout_marginEnd="10dp"
+        android:text="שם:"
         android:textAlignment="viewStart"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +97,8 @@
         android:layout_width="40dp"
         android:layout_height="26dp"
         android:layout_marginTop="8dp"
-        android:text="סוג"
+        android:layout_marginEnd="10dp"
+        android:text="סוג:"
         android:textAlignment="viewStart"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,19 +121,18 @@
         android:layout_width="58dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
         android:text="-"
-        app:layout_constraintEnd_toStartOf="@+id/tv_quantity"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_increase"
         android:layout_width="59dp"
         android:layout_height="48dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="4dp"
         android:text="+"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+        app:layout_constraintStart_toEndOf="@+id/tv_quantity"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -147,9 +140,16 @@
         android:layout_width="135dp"
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
         android:text="הוסף לעגלה"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
-        app:layout_constraintTop_toBottomOf="@+id/tv_quantity" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_quantity"
+        tools:layout_editor_absoluteX="17dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

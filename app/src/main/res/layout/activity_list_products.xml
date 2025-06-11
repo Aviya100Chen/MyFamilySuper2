@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5EE1E6"
-    tools:context=".ListProducts">
+    tools:context=".ListProducts_Activity">
 
     <ImageView
         android:id="@+id/imageView9"
@@ -29,6 +29,17 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_to_category" />
+
+    <Button
+        android:id="@+id/back_to_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="לרשימת קטגוריות המוצרים"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 

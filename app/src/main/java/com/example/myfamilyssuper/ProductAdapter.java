@@ -30,12 +30,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // יצירת View חדש עבור כל מוצר בעזרת LayoutInflater
         View productview = LayoutInflater.from(parent.getContext()).inflate(R.layout.products_item, parent, false);
         return new ProductViewHolder(productview);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+        // קישור המוצר הנוכחי למחזיק התצוגה
         Product currentProduct = products.get(position);
         Context context = holder.itemView.getContext();
 
@@ -43,31 +45,35 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.nameTextView.setText(currentProduct.getName());
         holder.priceTextView.setText(Double.toString(currentProduct.getPrice()));
 
-        // הגדרת יחידת מדידה
+        // הגדרת יחידת מדידה לפי קטגוריה
         boolean isKg = isCategoryMeasuredInKg(currentProduct.getCategory());
         holder.updateQuantityDisplay(isKg);
 
+        // לחצן הגדלת כמות
         holder.increaseButton.setOnClickListener(v -> {
             holder.increaseQuantity(isKg);
         });
 
+        // לחצן הקטנת כמות
         holder.decreaseButton.setOnClickListener(v -> {
             if (!holder.decreaseQuantity(isKg)) {
                 Toast.makeText(context, "לא ניתן לבחור כמות הקטנה מ-0.1", Toast.LENGTH_SHORT).show();
             }
         });
 
+        // שינוי כמות בלחיצה על טקסט הכמות
         holder.quantityTextView.setOnClickListener(v -> {
             showQuantityInputDialog(context, holder, isKg);
         });
 
-        //  לחיצה על "הוסף לעגלה"
+        // לחיצה על "הוסף לעגלה"
         holder.addToCartButton.setOnClickListener(v -> {
             if ((isKg && holder.quantity < 0.1) || (!isKg && holder.quantity < 1)) {
                 Toast.makeText(context, "לא ניתן להוסיף מוצר לעגלה ללא בחירת כמות מתאימה", Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            // יצירת עותק של המוצר עם כמות מתאימה
             Product productToAdd = new Product(
                     currentProduct.getCategory(),
                     currentProduct.getName(),
@@ -75,7 +81,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             );
             productToAdd.setQuantity(holder.quantity);
 
-
+            // הוספת המוצר לעגלה ועדכון בפיירבייס
             if(cart == null){
                 Toast.makeText(context, "נסה שנית", Toast.LENGTH_SHORT).show();
             }
@@ -99,10 +105,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return products.size();
     }
 
+    // בדיקה אם הקטגוריה נמדדת בק"ג
     private boolean isCategoryMeasuredInKg(String category) {
         return category.equalsIgnoreCase("ירקות ופירות") || category.equalsIgnoreCase("בשר ודגים");
     }
 
+    // תיבת דיאלוג להזנת כמות ידנית
     private void showQuantityInputDialog(Context context, ProductViewHolder holder, boolean isKg) {
         final EditText input = new EditText(context);
         input.setInputType(isKg ? InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL
@@ -147,6 +155,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
+            // קישור בין משתני המחלקה לרכיבי ה-XML
             categoryTextView = itemView.findViewById(R.id.textView_category_2);
             nameTextView = itemView.findViewById(R.id.textView_name_2);
             priceTextView = itemView.findViewById(R.id.textView_price_2);
@@ -156,6 +165,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             addToCartButton = itemView.findViewById(R.id.btn_add_to_cart);
         }
 
+        // עדכון טקסט תצוגת הכמות לפי סוג היחידה
         public void updateQuantityDisplay(boolean isKg) {
             if (isKg) {
                 quantityTextView.setText(String.format("%.1f ק\"ג", quantity));
@@ -165,11 +175,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             }
         }
 
+        // הגדלת כמות לפי סוג היחידה
         public void increaseQuantity(boolean isKg) {
             quantity += isKg ? 0.1 : 1;
             updateQuantityDisplay(isKg);
         }
 
+        // הקטנת כמות אם אפשר לפי מגבלות
         public boolean decreaseQuantity(boolean isKg) {
             double min = isKg ? 0.1 : 1;
             double step = isKg ? 0.1 : 1;
@@ -183,4 +195,5 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 }
+
 

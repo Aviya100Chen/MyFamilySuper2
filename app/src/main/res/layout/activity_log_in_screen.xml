@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#5DE1E6"
     android:backgroundTint="#5EE1E6"
-    tools:context=".LogInScreen">
+    tools:context=".LogInScreen_Activity">
 
 
         <ImageView
@@ -84,64 +84,37 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="145dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="140dp"
-            android:text="אימייל:"
-            android:textColor="#9C27B0"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/button_V"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title2"
-            app:layout_constraintVertical_bias="0.402" />
-
-        <EditText
-            android:id="@+id/username1"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:ems="10"
-            android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/button_V"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title2"
-            app:layout_constraintVertical_bias="0.304" />
-
-        <TextView
-            android:id="@+id/password"
-            android:layout_width="209dp"
-            android:layout_height="39dp"
-            android:layout_marginBottom="68dp"
-            android:text="סיסמא משפחתית:"
-            android:textColor="#9C27B0"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/button_V"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <EditText
-            android:id="@+id/password1"
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout_email"
+            android:layout_width="409dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp"
-            android:ems="10"
-            android:inputType="textPassword"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="אימייל" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout_password"
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/button_V"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText"
-            app:layout_constraintVertical_bias="0.944" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="סיסמא" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -12,33 +12,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyFamilysSuper"
         tools:targetApi="31">
-        <activity
-            android:name=".CartAdapter"
-            android:exported="false" />
+
         <activity
             android:name=".CartManager"
             android:exported="false" />
 
         <activity
-            android:name=".ListProducts"
+            android:name=".ListProducts_Activity"
             android:exported="false" />
         <activity
-            android:name=".ProductsActivity"
+            android:name=".Products_Activity"
             android:exported="false" />
         <activity
-            android:name=".MyCart"
+            android:name=".MyCart_Activity"
             android:exported="false" />
         <activity
-            android:name=".Start_ScreenActivity"
+            android:name=".Start_Screen_Activity"
             android:exported="false" />
         <activity
-            android:name=".sign_up_screen"
+            android:name=".sign_up_screen_Activity"
             android:exported="false" />
         <activity
-            android:name=".LogInScreen"
+            android:name=".LogInScreen_Activity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Main_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,7 +44,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".MusicService" />
+        <service
+            android:name=".MusicService" />
     </application>
 
 </manifest>
